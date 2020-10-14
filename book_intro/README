@@ -1,0 +1,151 @@
+"Effective Testin g With rspec-3" google it
+-------------------------------------------
+install ruby
+gem install rspec
+start your party as follows:
+
+mike@mkdc752341u:~/Desktop/rspec_bunnyslope/book_intro$ rspec --init
+  create   .rspec
+  create   spec/spec_helper.rb
+
+
+We will be working in the spec directory for this introductory test.
+--------------------------------------------------------------
+mike@mkdc752341u:~/Desktop/rspec_bunnyslope/book_intro$ cat life_spec.rb
+RSpec.describe Life do #example group
+
+
+  it "is hard" do #example || spec || "test case"
+   expect life(description).to eq("hard")
+  end
+end
+-------------------------------------
+We expect it to fail
+
+mike@mkdc752341u:~/Desktop/rspec_bunnyslope/book_intro$ rspec .
+
+An error occurred while loading ./life_spec.rb.
+Failure/Error:
+  RSpec.describe Life do
+
+    it "is hard" do
+     expect life(description).to eq("hard")
+    end
+  end
+
+NameError:
+  uninitialized constant Life <- class Life doesn't exist
+# ./life_spec.rb:1:in `<top (required)>'
+No examples found.
+-----------------------------------
+adding class Life in the life_spec.rb
+
+class Life
+end
+RSpec.describe Life do
+
+  it "is hard" do
+   expect life(description).to eq("hard")
+  end
+end
+----------------------------------
+we get a new failure this time!
+
+mike@mkdc752341u:~/Desktop/rspec_bunnyslope/book_intro$ rspec .
+F
+
+Failures:
+
+  1) Life is hard
+     Failure/Error: expect life(description).to eq("hard")
+       `description` is not available from within an example (e.g. an `it` block) or from constructs that run in the s
+cope of an example (e.g. `before`, `let`, etc). It is only available on an example group (e.g. a `describe` or `contex
+t` block).
+     # ./life_spec.rb:6:in `block (2 levels) in <top (required)>'
+
+Finished in 0.0033 seconds (files took 0.15211 seconds to load)
+1 example, 1 failure
+
+
+Failed examples:
+
+rspec ./life_spec.rb:5 # Life is hard <--shows line # and spec string "is hard"
+
+---------
+refactor code adding class initialize function , reader accessor and instance:
+
+class Life
+  attr_reader :description
+  def initialize(description)
+    @description = description
+  end
+end
+RSpec.describe Life do
+  let (life) {Life('super easy!')}
+
+  it "is hard" do
+   expect (@life.description).to eq("hard")
+  end
+end
+---------------------------
+
+more refactoring
+
+class Life
+  attr_reader :description
+  def initialize(description)
+    @description = description
+  end
+end
+RSpec.describe Life do
+  let (:life) {Life.new('super easy!')}
+
+  it "is hard" do
+   expect(life.description).to eq("hard")
+  end
+end
+------------------------------------
+F
+
+Failures:
+
+  1) Life is hard
+     Failure/Error: expect(life.description).to eq("hard")
+
+       expected: "hard"
+            got: "super easy!"
+
+       (compared using ==)
+     # ./life_spec.rb:11:in `block (2 levels) in <top (required)>'
+
+Finished in 0.12866 seconds (files took 0.15786 seconds to load)
+1 example, 1 failure
+
+
+Failed examples:
+
+rspec ./life_spec.rb:10 # Life is hard
+-------------------------------------
+refactor to Success:
+
+class Life
+  attr_reader :description
+  def initialize(description)
+    @description = description
+  end
+end
+RSpec.describe Life do
+  let (:life) {Life.new('hard')}
+
+  it "is hard" do
+   expect(life.description).to eq("hard")
+  end
+end
+
+
+mike@mkdc752341u:~/Desktop/rspec_bunnyslope/book_intro$ rspec .
+
+.
+
+Finished in 0.0036 seconds (files took 0.14721 seconds to load)
+1 example, 0 failures
