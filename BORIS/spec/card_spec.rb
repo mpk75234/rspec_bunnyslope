@@ -9,11 +9,11 @@ RSpec.describe Card do
     let(:card) {Card.new('Ace', 'Spades')}
   it 'has a mutable rank' do
     expect(card.rank).to eq('Ace')
-    card.rank = 'Dongerz'
-    expect(card.rank).to eq('Dongerz')
+    card.rank = 'King'
+    expect(card.rank).to eq('King')
   end
   it 'has a suit' do
-    suit = 'Hearts'
+    suit = 'Spades'
     expect(card.suit).to eq(suit),"Ehhhh. I expected #{card.suit} but... I up and got #{suit}"
   end
 end
