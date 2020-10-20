@@ -9,14 +9,14 @@ end
 
 RSpec.describe 'UAT server validation' do
   let(:server) { Server.new('COB', 'SWDC')}
-  before do
+  before(:example) do
     if server.env != 'UAT'
       puts "ENV MUST BE UAT FOR THIS TEST SUITE..."
     else
       puts "server is #{server.env}"
     end
   end
-  after do
+  after(:example) do
     if server.env != 'UAT'
       puts "MUST BE UAT FOR THIS TEST SUITE..."
     else
