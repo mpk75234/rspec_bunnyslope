@@ -6,6 +6,7 @@ class Card
   end
 end
 RSpec.describe Card do
+    #let object will persist and is cache, the let is re-evaluated for each example
     let(:card) {Card.new('Ace', 'Spades')}
   it 'has a mutable rank' do
     expect(card.rank).to eq('Ace')
