@@ -11,14 +11,14 @@ RSpec.describe 'UAT server validation' do
   let(:server) { Server.new('COB', 'SWDC')}
   before do
     if server.env != 'UAT'
-      puts "ENV MUST BE UAT FOR THIS TEST SUITE...STAPH!!!"
+      puts "ENV MUST BE UAT FOR THIS TEST SUITE..."
     else
       puts "server is #{server.env}"
     end
   end
   after do
     if server.env != 'UAT'
-      puts "YOU R FUKKING UP THE LAB!!! ENV MUST BE UAT FOR THIS TEST SUITE...STAPH!!!"
+      puts "MUST BE UAT FOR THIS TEST SUITE..."
     else
       puts "server is #{server.env}"
     end
