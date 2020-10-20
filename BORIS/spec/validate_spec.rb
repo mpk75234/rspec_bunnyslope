@@ -8,7 +8,7 @@ class Server
 end
 
 RSpec.describe 'UAT server validation' do
-  let(:server) { Server.new('COB', 'SWDC')}
+  let(:server) { Server.new('COB', 'MWDC')}
   before(:context) do
     puts "I run before each context block"
   end
@@ -28,12 +28,12 @@ RSpec.describe 'UAT server validation' do
   end
 
   it 'should be from MWDC' do
-    expect(server.dc).to eq('MWDC'), "Be advised this test suite is for UAT MWDC servers only, not for #{server.env} from #{server.dc}"
+    expect(server.dc).to eq('MWDC'), "FAIL Be advised this test suite is for UAT MWDC servers only, not for #{server.env} from #{server.dc}"
   end
   context 'PROD' do
     it 'should run in UAT' do
     server.env = 'PROD'
-    expect(server.env).to eq('UAT'),"should be UAT from MWDC not #{server.env} from #{server.dc}"
+    expect(server.env).to eq('UAT'),"FAIL should be UAT from MWDC not #{server.env} from #{server.dc}"
   end
   end
 end
