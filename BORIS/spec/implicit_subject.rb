@@ -4,6 +4,6 @@ RSpec.describe Hash do
   it 'should be the empty' do
     puts subject
     puts subject.class
-    expect(subject.length).to eq(20)  
+    expect(subject.length).to eq(0)  
   end
 end
