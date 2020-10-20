@@ -13,6 +13,7 @@ RSpec.describe Card do
     expect(card.rank).to eq('Dongerz')
   end
   it 'has a suit' do
-    expect(card.suit).to eq('Spades')
+    suit = 'Hearts'
+    expect(card.suit).to eq(suit),"Ehhhh. I expected #{card.suit} but... I up and got #{suit}"
   end
 end
