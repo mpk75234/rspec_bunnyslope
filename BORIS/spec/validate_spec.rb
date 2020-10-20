@@ -9,6 +9,9 @@ end
 
 RSpec.describe 'UAT server validation' do
   let(:server) { Server.new('COB', 'SWDC')}
+  before(:context) do
+    puts "I run before each context block"
+  end
   before(:example) do
     if server.env != 'UAT'
       puts "ENV MUST BE UAT FOR THIS TEST SUITE..."
@@ -26,5 +29,11 @@ RSpec.describe 'UAT server validation' do
 
   it 'should be from MWDC' do
     expect(server.dc).to eq('MWDC'), "Be advised this test suite is for UAT MWDC servers only, not for #{server.env} from #{server.dc}"
+  end
+  context 'PROD' do
+    it 'should run in UAT' do
+    server.env = 'PROD'
+    expect(server.env).to eq('UAT'),"should be UAT from MWDC not #{server.env} from #{server.dc}"
+  end
   end
 end
