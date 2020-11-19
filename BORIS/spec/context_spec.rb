@@ -1,5 +1,5 @@
 RSpec.describe 'multiple describe blocks' do
-  #this before runs before each nexsted example
+  #this before runs before each nested example
   before do
      puts "BEFORE"
   end
